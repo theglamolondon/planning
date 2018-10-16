@@ -25,14 +25,14 @@
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
         <div class="text-center navbar-brand-wrapper d-flex align-items-top justify-content-center">
             <a class="navbar-brand brand-logo" href="#">
-                <img src="{{ asset("images/logo.svg") }}" alt="logo" />
+                <img src="{{ asset("images/faces/logokpmg.jpg") }}" alt="logo" />
             </a>
             <a class="navbar-brand brand-logo-mini" href="#">
-                <img src="{{ asset("images/logo-mini.svg") }}" alt="logo" />
+                <img src="{{ asset("images/faces/logokpmg.jpg") }}" alt="logo" />
             </a>
         </div>
         <div class="navbar-menu-wrapper d-flex align-items-center">
-            <ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
+          {{--  <ul class="navbar-nav navbar-nav-left header-links d-none d-md-flex">
                 <li class="nav-item">
                     <a href="#" class="nav-link">Schedule
                         <span class="badge badge-primary ml-1">New</span>
@@ -46,7 +46,7 @@
                     <a href="#" class="nav-link">
                         <i class="mdi mdi-bookmark-plus-outline"></i>Score</a>
                 </li>
-            </ul>
+            </ul>--}}
             <ul class="navbar-nav navbar-nav-right">
                 <li class="nav-item dropdown">
                     <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
@@ -273,7 +273,7 @@
                 <div class="container-fluid clearfix">
             <span class="text-muted d-block text-center text-sm-left d-sm-inline-block">Copyright © 2018
                All rights reserved.</span>
-                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> </span>
+                    <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center"> SOFTN'FIX Technology</span>
                 </div>
             </footer>
             <!-- partial -->
