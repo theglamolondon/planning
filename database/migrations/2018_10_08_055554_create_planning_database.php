@@ -18,6 +18,7 @@ class CreatePlanningDatabase extends Migration
 	    	$table->string('titre');
 	    	$table->date('debut');
 	    	$table->date('fin');
+	    	$table->string("couleur",10)->default('#FFFFFF');
 	    	$table->string('details')->nullable();
 	    });
 	    Schema::create('membres', function (Blueprint $table) {

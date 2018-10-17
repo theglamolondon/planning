@@ -17,6 +17,10 @@
                                 <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre de la tache">
                             </div>
                             <div class="form-group">
+                                <label for="titre">Couleur</label>
+                                <input type="color" class="" id="couleur" name="couleur" placeholder="Couleur de la mission">
+                            </div>
+                            <div class="form-group">
                                 <label for="debut">Début</label>
                                 <input type="text" class="form-control" name="debut" id="debut" placeholder="JJ/MM/AAAA" value="{{ \Carbon\Carbon::now()->format('d/m/Y') }}">
                             </div>

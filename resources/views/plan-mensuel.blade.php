@@ -40,7 +40,7 @@
 
                                 @php $start->addDay(1) @endphp
 
-                                <th @if($start->dayOfWeek == \Carbon\Carbon::SATURDAY || $start->dayOfWeek == \Carbon\Carbon::SUNDAY )
+                                <td @if($start->dayOfWeek == \Carbon\Carbon::SATURDAY || $start->dayOfWeek == \Carbon\Carbon::SUNDAY )
                                     class="bg-secondary" @endif >
                                     @foreach($taches->where('membre_id','=', $membre->id)->filter(function($item, $key) use ($i){
                                         return
@@ -48,10 +48,10 @@
                                                 \Carbon\Carbon::createFromFormat('Y-m-d',$item->debut)->day <= ($i+1);
                                     }) as $tache)
                                         @if(!($start->dayOfWeek == \Carbon\Carbon::SATURDAY || $start->dayOfWeek == \Carbon\Carbon::SUNDAY) )
-                                            {{ $tache->titre }} <hr/>
+                                            <div class="item" style="background-color: {{ $tache->couleur }}">{{ $tache->titre }}</div> <hr/>
                                         @endif
                                     @endforeach
-                                </th>
+                                </td>
                             @endfor
                         </tr>
                         @endforeach
