@@ -56,6 +56,7 @@ class EventController extends Controller
     {
     	$tache = new Tache();
     	$tache->titre = $request->input('titre');
+    	$tache->couleur = $request->input('couleur');
     	$tache->details = $request->input('details');
     	$tache->debut = Carbon::createFromFormat("d/m/Y",$request->input('debut'))->toDateString();
     	$tache->fin = Carbon::createFromFormat("d/m/Y",$request->input('fin'))->toDateString();
