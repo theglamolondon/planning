@@ -15,7 +15,7 @@ class Effectuer extends Model
 		return $this->belongsTo(Membre::class,'membre_id');
 	}
 
-	public function taches(){
-		return $this->belongsTo(Tache::class, 'tache_id');
+	public function missions(){
+		return $this->belongsTo(Mission::class, 'mission_id');
 	}
 }

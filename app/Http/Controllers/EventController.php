@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Effectuer;
+use App\Grade;
 use App\Membre;
-use App\Tache;
+use App\Mission;
+use App\Template;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -23,8 +25,8 @@ class EventController extends Controller
     {
 		$week = $this->getWeek(intval($annee), intval($mois), intval($jour));
 
-		$taches = Tache::with("membres")
-		               ->whereBetween('debut',[$week->dimanche->toDateString(),$week->samedi->toDateString()])->get();
+		$taches = Mission::with("membres")
+		                 ->whereBetween('debut',[$week->dimanche->toDateString(),$week->samedi->toDateString()])->get();
 
 		return view("plan-hebdo", compact("week", "taches"));
     }
@@ -36,14 +38,22 @@ class EventController extends Controller
     	$end = Carbon::now()->endOfMonth();
     	$monthName = self::getMonthsNames()[$start->month];
 
-    	$membres = Membre::all();
-	    $taches = Tache::join('effectuer','tache_id','=','taches.id')
-		    ->join('membres', 'membre_id', '=', 'membres.id')
-		    ->whereBetween('debut',[$start->toDateString(),$end->toDateString()])
-		    ->get();
+    	$membres = Membre::with('grade')
+	                     ->where('grade_id', '<>', Grade::MANAGER)
+	                     ->get();
 
-		//dd($taches);
-	    return view("plan-mensuel", compact("start", "end", "monthName", "taches", "membres"));
+	    $missions = Mission::join('effectuer','mission_id','=','missions.id')
+	                     ->join('membres', 'membre_id', '=', 'membres.id')
+	                     ->whereBetween('debut',[$start->toDateString(),$end->toDateString()])
+	                     ->get();
+		$managers = Membre::with('grade')
+		                  ->where('grade_id', '=', Grade::MANAGER)
+		                  ->get();
+
+		$templates = Template::all();
+
+		//dd($missions);
+	    return view("plan-mensuel", compact("start", "end", "monthName", "missions", "membres", "managers", "templates"));
     }
 
 	/**
@@ -54,7 +64,7 @@ class EventController extends Controller
 	 */
     public function addPlanning(Request $request)
     {
-    	$tache = new Tache();
+    	$tache = new Mission();
     	$tache->titre = $request->input('titre');
     	$tache->couleur = $request->input('couleur');
     	$tache->details = $request->input('details');
@@ -67,7 +77,7 @@ class EventController extends Controller
 	    {
 		    $effectuer = new Effectuer();
 		    $effectuer->membre_id = $membre;
-		    $effectuer->tache_id = $tache->id;
+		    $effectuer->mission_id = $tache->id;
 		    $effectuer->saveOrFail();
 	    }
 

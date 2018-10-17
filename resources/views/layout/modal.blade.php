@@ -17,7 +17,7 @@
                                 <input type="text" class="form-control" id="titre" name="titre" placeholder="Titre de la tache">
                             </div>
                             <div class="form-group">
-                                <label for="titre">Couleur</label>
+                                <label for="titre">Manager</label>
                                 <input type="color" class="" id="couleur" name="couleur" placeholder="Couleur de la mission">
                             </div>
                             <div class="form-group">

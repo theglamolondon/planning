@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset("css/materialdesignicons.min.css") }}">
     <link rel="stylesheet" href="{{ asset("css/vendor.bundle.base.css") }}">
     <link rel="stylesheet" href="{{ asset("css/vendor.bundle.addons.css") }}">
+    <link rel="stylesheet" href="{{ asset("css/bootstrap-multiselect.css") }}">
     <!-- endinject -->
     <!-- plugin css for this page -->
     <!-- End plugin css for this page -->
@@ -288,6 +289,7 @@
 <!-- plugins:js -->
 <script src="{{ asset("js/vendor.bundle.base.js") }}"></script>
 <script src="{{ asset("js/vendor.bundle.addons.js") }}"></script>
+<script src="{{ asset("js/bootstrap-multiselect.js") }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 @yield("script")
 <!-- endinject -->

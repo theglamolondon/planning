@@ -32,23 +32,33 @@
                         <tbody>
                         @foreach($membres as $membre)
                         <tr>
-                            <td>Titre {{ $loop->index + 1 }}</td>
+                            <td>{{ $membre->grade->code }}</td>
                             <td>{{ $membre->nom }} {{ $membre->prenoms }}</td>
 
                             @php $start->addDay(-($end->day)) //On réinitialise la date pour la mettre au début du mois @endphp
                             @for($i=0; $i < $end->day; $i++ )
 
-                                @php $start->addDay(1) @endphp
+                                @php $start->addDay(1);
 
-                                <td @if($start->dayOfWeek == \Carbon\Carbon::SATURDAY || $start->dayOfWeek == \Carbon\Carbon::SUNDAY )
-                                    class="bg-secondary" @endif >
-                                    @foreach($taches->where('membre_id','=', $membre->id)->filter(function($item, $key) use ($i){
+                                $all = ($missions->where('membre_id','=', $membre->id)->filter(function($item, $key) use ($i){
                                         return
                                                 \Carbon\Carbon::createFromFormat('Y-m-d',$item->fin)->day >= ($i+1) &&
                                                 \Carbon\Carbon::createFromFormat('Y-m-d',$item->debut)->day <= ($i+1);
-                                    }) as $tache)
+                                    }))
+                                @endphp
+
+                                <td @if($start->dayOfWeek == \Carbon\Carbon::SATURDAY || $start->dayOfWeek == \Carbon\Carbon::SUNDAY )
+                                    class="bg-secondary" @endif @if($all->count() > 1) class="bg-danger" @endif>
+                                    @foreach($all as $mission)
                                         @if(!($start->dayOfWeek == \Carbon\Carbon::SATURDAY || $start->dayOfWeek == \Carbon\Carbon::SUNDAY) )
-                                            <div class="item" style="background-color: {{ $tache->couleur }}">{{ $tache->titre }}</div> <hr/>
+
+                                            @php
+                                            $manager = (($missions->where('mission_id','=', $mission->mission_id))->where('grade_id','=',\App\Grade::MANAGER));
+                                            @endphp
+
+                                            <div class="item" style="background-color: {{ $manager[0]->couleur ?? $manager->first()->couleur  }}">
+                                                {{ $mission->titre }}
+                                            </div> <hr/>
                                         @endif
                                     @endforeach
                                 </td>
@@ -57,6 +67,23 @@
                         @endforeach
                         </tbody>
                     </table>
+                </div>
+
+                @foreach($managers as $manager)
+                    <div class="legend">
+                        <span class="man-color" style="background-color: {{$manager->couleur}};">
+                        </span><span class="man-name">{{ substr($manager->nom,0,1) }}{{ substr($manager->prenoms,0,1) }}</span>
+                    </div>
+                @endforeach
+                @foreach($templates as $template)
+                    <div class="legend">
+                        <span class="man-color" style="background-color: {{$template->couleur}};">
+                        </span><span class="man-name">{{ $template->libelle }}</span>
+                    </div>
+                @endforeach
+                <div class="legend">
+                        <span class="man-color" style="background-color: {{\App\Template::CONFLIT_COULEUR}};">
+                        </span><span class="man-name">{{ \App\Template::CONFLIT_LIBELLE }}</span>
                 </div>
             </div>
         </div>
