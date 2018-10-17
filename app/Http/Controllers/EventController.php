@@ -64,20 +64,26 @@ class EventController extends Controller
 	 */
     public function addPlanning(Request $request)
     {
-    	$tache = new Mission();
-    	$tache->titre = $request->input('titre');
-    	$tache->couleur = $request->input('couleur');
-    	$tache->details = $request->input('details');
-    	$tache->debut = Carbon::createFromFormat("d/m/Y",$request->input('debut'))->toDateString();
-    	$tache->fin = Carbon::createFromFormat("d/m/Y",$request->input('fin'))->toDateString();
+    	$mission = new Mission();
+	    $mission->titre = $request->input('titre');
+	    $mission->debut = Carbon::createFromFormat("d/m/Y",$request->input('debut'))->toDateString();
+	    $mission->fin = Carbon::createFromFormat("d/m/Y",$request->input('fin'))->toDateString();
+	    $mission->details = $request->input('details');
+	    $mission->template_id = null;
+	    $mission->saveOrFail();
 
-    	$tache->saveOrFail();
+	    //Ajout du manager
+	    $effectuer = new Effectuer();
+	    $effectuer->membre_id = $request->input('manager');
+	    $effectuer->mission_id = $mission->id;
+	    $effectuer->saveOrFail();
 
+	    //Ajout des autres membres
     	foreach ($request->input("membres") as $membre)
 	    {
 		    $effectuer = new Effectuer();
 		    $effectuer->membre_id = $membre;
-		    $effectuer->mission_id = $tache->id;
+		    $effectuer->mission_id = $mission->id;
 		    $effectuer->saveOrFail();
 	    }
 

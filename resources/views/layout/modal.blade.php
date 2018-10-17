@@ -18,7 +18,11 @@
                             </div>
                             <div class="form-group">
                                 <label for="titre">Manager</label>
-                                <input type="color" class="" id="couleur" name="couleur" placeholder="Couleur de la mission">
+                                <select name="manager" class="form-control" id="manager">
+                                    @foreach(\App\Membre::where('grade_id', '=', \App\Grade::MANAGER)->get() as $membre)
+                                        <option value="{{ $membre->id }}"> {{ $membre->nom }} {{ $membre->prenoms }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="debut">Début</label>
@@ -33,13 +37,11 @@
                                 <textarea type="text" class="form-control" name="details" id="details" placeholder="Commentaires"></textarea>
                             </div>
                             <div class="form-group">
-                            @foreach(\App\Membre::all() as $membre)
-                                <div class="form-check">
-                                    <label class="form-control">
-                                        <input type="checkbox" name="membres[]" value="{{ $membre->id }}" class="form-check-input"> {{ $membre->nom }} {{ $membre->prenoms }}
-                                    </label>
-                                </div>
-                            @endforeach
+                                <select name="membres[]" class="form-control" id="membres" multiple="multiple">
+                                    @foreach(\App\Membre::where('grade_id', '<>', \App\Grade::MANAGER)->get() as $membre)
+                                        <option value="{{ $membre->id }}"> {{ $membre->nom }} {{ $membre->prenoms }}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
