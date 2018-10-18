@@ -162,8 +162,8 @@
                 </li>
                 <li class="nav-item dropdown d-none d-xl-inline-block">
                     <a class="nav-link dropdown-toggle" id="UserDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
-                        <span class="profile-text">Hello, Richard V.Welsh !</span>
-                        <img class="img-xs rounded-circle" src="{{ asset("images/faces/face1.jpg") }}" alt="Profile image">
+                        <span class="profile-text">Hello, Jean-Sidoine !</span>
+                        <img class="img-xs rounded-circle" src="{{ asset("images/faces/img1.jpg") }}" alt="Profile image">
                     </a>
                     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
                         <a class="dropdown-item p-0">
@@ -209,17 +209,17 @@
                     <div class="nav-link">
                         <div class="user-wrapper">
                             <div class="profile-image">
-                                <img src="{{ asset("images/faces/face1.jpg") }}" alt="profile image">
+                                <img src="{{ asset("images/faces/img1.jpg") }}" alt="profile image">
                             </div>
                             <div class="text-wrapper">
-                                <p class="profile-name">Richard V.Welsh</p>
+                                <p class="profile-name">Jean-Sidoine AKE</p>
                                 <div>
-                                    <small class="designation text-muted">Manager</small>
+                                    <small class="designation text-muted">ADMINISTRATEUR</small>
                                     <span class="status-indicator online"></span>
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-success btn-block" data-toggle="modal" data-target="#exampleModal">Ajouter une tache
+                        <button class="btn btn-success btn-block" data-toggle="modal" data-target="#exampleModal">Ajouter une mission
                             <i class="mdi mdi-plus"></i>
                         </button>
                     </div>
