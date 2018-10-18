@@ -60,10 +60,10 @@
 
                                 @php $start->addDay(1);
 
-                                $all = ($missions->where('membre_id','=', $membre->id)->filter(function($item, $key) use ($i){
+                                $all = ($missions->where('membre_id','=', $membre->id)->filter(function($item, $key) use ($start){
                                         return
-                                                \Carbon\Carbon::createFromFormat('Y-m-d',$item->fin)->day >= ($i+1) &&
-                                                \Carbon\Carbon::createFromFormat('Y-m-d',$item->debut)->day <= ($i+1);
+                                                \Carbon\Carbon::createFromFormat('Y-m-d',$item->fin) >= $start &&
+                                                \Carbon\Carbon::createFromFormat('Y-m-d',$item->debut) <= $start;
                                     }))
                                 @endphp
 
