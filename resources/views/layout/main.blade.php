@@ -219,7 +219,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="btn btn-success btn-block" data-toggle="modal" data-target="#exampleModal">Ajouter une mission
+                        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal">Ajouter une mission
                             <i class="mdi mdi-plus"></i>
                         </button>
                     </div>
