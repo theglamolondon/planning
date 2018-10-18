@@ -14,7 +14,8 @@
                         <option value="{{ $i }}" @if($i == request("annee") ?? date('Y')) selected @endif>{{ $i }}</option>
                         @endfor
                     </select>
-                    <button type="submit" class="btn btn-success">
+
+                    <button type="submit" class="btn btn-primary">
                         <i class="menu-icon mdi mdi-calendar"></i> Rechercher
                     </button>
                 </div>
