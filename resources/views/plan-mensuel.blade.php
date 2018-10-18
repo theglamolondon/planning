@@ -90,8 +90,8 @@
 
                 @foreach($managers as $manager)
                     <div class="legend">
-                        <span class="man-color" style="background-color: {{$manager->couleur}};">
-                        </span><span class="man-name">{{ substr($manager->nom,0,1) }}{{ substr($manager->prenoms,0,1) }}</span>
+                        <a href="javascript:void(0);" title="{{ $manager->nom }} {{ $manager->prenoms }}"><span class="man-color" style="background-color: {{$manager->couleur}};"></span></a>
+                        <span class="man-name">{{ substr($manager->nom,0,1) }}{{ substr($manager->prenoms,0,1) }}</span>
                     </div>
                 @endforeach
                 @foreach($templates as $template)
