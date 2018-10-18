@@ -31,12 +31,16 @@ class EventController extends Controller
 		return view("plan-hebdo", compact("week", "taches"));
     }
 
-    public function showPlanOfMonth()
+    public function showPlanOfMonth(Request $request)
     {
-    	$shadow = Carbon::now()->firstOfMonth();
-    	$start = Carbon::now()->firstOfMonth();
-    	$end = Carbon::now()->endOfMonth();
-    	$monthName = self::getMonthsNames()[$start->month];
+	    $start = Carbon::now()->firstOfMonth();
+	    $end = Carbon::now()->endOfMonth();
+
+	    if($request->has('mois') && $request->has('annee'))
+	    {
+			$start->setDate($request->query('annee'), $request->query('mois'), 1);
+			$end = Carbon::create($request->query('annee'), $request->query('mois'), 1)->endOfMonth();
+	    }
 
     	$membres = Membre::with('grade')
 	                     ->where('grade_id', '<>', Grade::MANAGER)
@@ -44,8 +48,11 @@ class EventController extends Controller
 
 	    $missions = Mission::join('effectuer','mission_id','=','missions.id')
 	                     ->join('membres', 'membre_id', '=', 'membres.id')
-	                     ->whereBetween('debut',[$start->toDateString(),$end->toDateString()])
+	                     ->where('debut', '<=',$end->toDateString())
+	                     ->where('fin','>=',$start->toDateString())
 	                     ->get();
+	    //dd($missions);
+
 		$managers = Membre::with('grade')
 		                  ->where('grade_id', '=', Grade::MANAGER)
 		                  ->get();
@@ -53,7 +60,7 @@ class EventController extends Controller
 		$templates = Template::all();
 
 		//dd($missions);
-	    return view("plan-mensuel", compact("start", "end", "monthName", "missions", "membres", "managers", "templates"));
+	    return view("plan-mensuel", compact("start", "end", "missions", "membres", "managers", "templates"));
     }
 
 	/**

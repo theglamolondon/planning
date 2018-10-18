@@ -1,6 +1,25 @@
 @extends("layout.main")
 @section("content")
     <div class="row">
+        <form class="" action="" method="get">
+            <div class="form-group">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <button type="submit" class="input-group-text">Go</button>
+                    </div>
+                    <select name="mois" class="form-control">
+                        @foreach(\App\Http\Controllers\EventController::getMonthsNames() as $k => $v)
+                        <option value="{{ $k }}" @if($k == request("mois") ?? date('m')) selected @endif>{{ $v }}</option>
+                        @endforeach
+                    </select>
+                    <select name="annee" class="form-control">
+                        @for($i=2017; $i<= date('Y'); $i++)
+                        <option value="{{ $i }}" @if($i == request("annee") ?? date('Y')) selected @endif>{{ $i }}</option>
+                        @endfor
+                    </select>
+                </div>
+            </div>
+        </form>
         <div class="card col-md-12">
             <div class="card-body">
                 <div class="table-responsive">
@@ -11,7 +30,7 @@
                                 <h3>Période / Staff</h3>
                             </th>
                             <th colspan="{{ $end->day }}" valign="center">
-                                <h2>{{ $monthName }} {{ $end->year }}</h2>
+                                <h2>{{ \App\Http\Controllers\EventController::getMonthsNames()[request("mois") ?? date('m')] }} {{ request("annee") ?? date('Y') }}</h2>
                             </th>
                         </tr>
                         <tr class="headings">
