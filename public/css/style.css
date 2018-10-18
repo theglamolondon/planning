@@ -16308,3 +16308,17 @@ ul {
 .item{
   padding: 7px;
 }
+.legend{
+  display: inline-block;
+}
+.legend .man-color{
+  width: 30px;
+  height: 15px;
+  margin: 0 2px;
+  display: inline-block;
+  border: 1px #cbcbcb solid;
+}
+.legend .man-name{
+  margin: 2px;
+  display: inline-block;
+}
