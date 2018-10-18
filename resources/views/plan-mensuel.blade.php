@@ -4,9 +4,6 @@
         <form class="" action="" method="get">
             <div class="form-group">
                 <div class="input-group">
-                    <div class="input-group-prepend">
-                        <button type="submit" class="input-group-text">Go</button>
-                    </div>
                     <select name="mois" class="form-control">
                         @foreach(\App\Http\Controllers\EventController::getMonthsNames() as $k => $v)
                         <option value="{{ $k }}" @if($k == request("mois") ?? date('m')) selected @endif>{{ $v }}</option>
@@ -17,6 +14,9 @@
                         <option value="{{ $i }}" @if($i == request("annee") ?? date('Y')) selected @endif>{{ $i }}</option>
                         @endfor
                     </select>
+                    <button type="submit" class="btn btn-success">
+                        <i class="menu-icon mdi mdi-calendar"></i> Rechercher
+                    </button>
                 </div>
             </div>
         </form>
@@ -48,7 +48,7 @@
                             @endfor
                         </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="planning">
                         @foreach($membres as $membre)
                         <tr>
                             <td>{{ $membre->grade->code }}</td>
@@ -77,7 +77,7 @@
 
                                             <div class="item" style="background-color: {{ $manager[0]->couleur ?? $manager->first()->couleur  }}">
                                                 {{ $mission->titre }}
-                                            </div> <hr/>
+                                            </div>
                                         @endif
                                     @endforeach
                                 </td>

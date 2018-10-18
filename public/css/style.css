@@ -16322,3 +16322,9 @@ ul {
   margin: 2px;
   display: inline-block;
 }
+.planning td {
+  padding: .65rem;
+}
+.planning td div{
+  display: inline-block;
+}
