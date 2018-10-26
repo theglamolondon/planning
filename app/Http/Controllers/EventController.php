@@ -107,4 +107,13 @@ class EventController extends Controller
 		$date = Carbon::createFromFormat('d/m/Y',$request->query('periode'));
 		return redirect()->route('index', ["annee" => $date->year, "mois" => $date->month, "jour" => $date->day]);
     }
+
+    public function removePlanning($membre, $mission)
+    {
+    	Effectuer::where('membre_id','=',$membre)
+		    ->where('mission_id','=',$mission)
+	        ->delete();
+
+    	return back();
+    }
 }

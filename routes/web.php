@@ -20,4 +20,5 @@ Route::get('/trainning/vuejs','VueJsController@index')->name('vue.index');
 Route::get('/planning/{annee}/{mois}/{jour}','EventController@showPlanOfWeek')->name('index');
 Route::get('/planning/mensuel','EventController@showPlanOfMonth')->name('mensuel');
 Route::post('/planning/add','EventController@addPlanning')->name('plan.add');
+Route::get('/mission/remove/{membre}/{mission}','EventController@removePlanning')->name('plan.remove');
 Route::get('/planning/redirect','EventController@performPlan')->name('plan.redirect');

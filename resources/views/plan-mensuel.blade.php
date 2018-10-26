@@ -78,6 +78,12 @@
 
                                             <div class="item" style="background-color: {{ $manager[0]->couleur ?? $manager->first()->couleur  }}">
                                                 {{ $mission->titre }}
+
+                                                @if($all->count() > 1)
+                                                    <a href="{{ route('plan.remove',[ 'membre' => $membre->id, "mission" => $mission->mission_id]) }}" onclick="return confirm('Voulez-vous supprimer la mission ?')">
+                                                        <i class="menu-icon mdi mdi-delete"></i>
+                                                    </a>
+                                                @endif
                                             </div>
                                         @endif
                                     @endforeach
